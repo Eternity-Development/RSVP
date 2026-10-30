@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum RsvpStatus {
+  CONFIRMED
+  WAITLISTED
+  CANCELLED
+}
+
+model Event {
+  id          String   @id @default(uuid()) @db.Uuid
+  title       String   @db.VarChar(200)
+  description String   @default("")
+  location    String   @db.VarChar(500)
+  startsAt    DateTime @db.Timestamptz(3)
+  capacity    Int
+  createdAt   DateTime @default(now()) @db.Timestamptz(3)
+  rsvps       Rsvp[]
+
+  @@index([startsAt])
+}
+
+model Rsvp {
+  id          String     @id @default(uuid()) @db.Uuid
+  eventId     String     @db.Uuid
+  event       Event      @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  name        String     @db.VarChar(120)
+  email       String     @db.VarChar(254)
+  status      RsvpStatus
+  cancelToken String     @unique @default(uuid()) @db.Uuid
+  // Insert time, not transaction start, so waitlist order follows lock order.
+  createdAt   DateTime   @default(dbgenerated("clock_timestamp()")) @db.Timestamptz(6)
+
+  @@unique([eventId, email])
+  @@index([eventId, status, createdAt])
+}
