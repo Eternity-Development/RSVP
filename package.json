@@ -11,7 +11,6 @@
     "db:migrate": "npm run db:migrate --prefix backend",
     "db:deploy": "npm run db:deploy --prefix backend",
     "db:generate": "npm run db:generate --prefix backend",
-    "db:seed": "npm run db:seed --prefix backend",
     "test": "npm test --prefix backend"
   },
   "devDependencies": {

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
 import EventForm from "@/components/EventForm";
 import { LoadError, Notice, Skeleton, Status, buttonOutline, useAction, useConfirm } from "@/components/ui";
@@ -19,7 +19,10 @@ export default function ManageEventPage() {
   const router = useRouter();
   const [status, setStatus] = useState<RsvpStatus>();
   const [editing, setEditing] = useState(false);
-  const [notice, setNotice] = useState<string | null>(null);
+  const justCreated = useSearchParams().get("created") === "1";
+  const [notice, setNotice] = useState<string | null>(
+    justCreated ? "Event published. Share the public page so people can RSVP." : null,
+  );
   const action = useAction();
   const [confirm, confirmDialog] = useConfirm();
 
@@ -57,7 +60,7 @@ export default function ManageEventPage() {
     });
     if (ok) perform(async () => {
       await api.deleteEvent(current.id);
-      router.push("/");
+      router.push("/admin");
     });
   }
 
@@ -75,9 +78,7 @@ export default function ManageEventPage() {
   return (
     <div className="space-y-10">
       {confirmDialog}
-      <p className="text-xs text-muted">
-        Organizer tools aren&apos;t behind a login yet — add authentication before putting this online.
-      </p>
+      <Link href="/admin" className="text-sm text-muted hover:text-ink">← Your events</Link>
 
       <header className="flex flex-wrap items-start justify-between gap-6">
         <div className="min-w-0 max-w-2xl">
@@ -89,7 +90,7 @@ export default function ManageEventPage() {
           {e.description && <p className="mt-4 whitespace-pre-line text-[15px] leading-relaxed">{e.description}</p>}
         </div>
         <div className="flex flex-wrap gap-2">
-          <Link href={`/events/${e.id}`} className={buttonOutline}>Public page</Link>
+          <Link href={`/events/${e.id}`} className={buttonOutline}>View public page</Link>
           <button onClick={() => setEditing(!editing)} className={buttonOutline}>{editing ? "Close editor" : "Edit"}</button>
           <button onClick={deleteEvent} className={`${buttonOutline} text-accent`}>Delete</button>
         </div>

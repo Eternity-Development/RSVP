@@ -36,12 +36,9 @@ export default function EventCard({ event }: { event: EventSummary }) {
         <p className="mt-1.5 tabular-nums text-muted">
           {event.confirmedCount} of {event.capacity} confirmed
         </p>
-        <div className="mt-3 flex gap-4 sm:justify-end">
-          <Link href={`/events/${event.id}`} className="font-medium underline-offset-4 hover:underline">
-            {event.isFull ? "Join waitlist" : "Details"} →
-          </Link>
-          <Link href={`/admin/events/${event.id}`} className="text-muted hover:text-ink">Manage</Link>
-        </div>
+        <Link href={`/events/${event.id}`} className="mt-3 inline-block font-medium underline-offset-4 hover:underline">
+          {event.isFull ? "Join waitlist" : "Reserve a seat"} →
+        </Link>
       </div>
     </li>
   );

@@ -9,7 +9,7 @@ export default function Header() {
         </Link>
         <nav className="flex gap-6 text-sm">
           <Link href="/" className="hover:text-accent">Events</Link>
-          <Link href="/admin/events/new" className="hover:text-accent">New event</Link>
+          <Link href="/admin" className="hover:text-accent">Organizer</Link>
         </nav>
       </div>
     </header>

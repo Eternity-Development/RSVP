@@ -7,7 +7,7 @@ const fraunces = Fraunces({ subsets: ["latin"], variable: "--font-fraunces" });
 const plex = IBM_Plex_Sans({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-plex" });
 
 export const metadata: Metadata = {
-  title: "rsvp. — upcoming events",
+  title: "rsvp. — events",
   description: "Browse upcoming events and reserve your seat.",
 };
 

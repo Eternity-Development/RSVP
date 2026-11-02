@@ -63,7 +63,7 @@ export default function EventForm({ initial, submitLabel, onSubmit, onCancel }: 
         <textarea rows={4} {...bind("description")} />
       </Field>
       <Field label="Venue or online meeting link" error={fieldError("location")}>
-        <input {...bind("location")} placeholder="Room 204, Tech Hub — or https://meet.example.com/abc" />
+        <input {...bind("location")} placeholder="Venue address, or a Zoom / Google Meet link" />
       </Field>
       <div className="grid gap-5 sm:grid-cols-2">
         <Field label="Starts at" error={fieldError("startsAt")}>

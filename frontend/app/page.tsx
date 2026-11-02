@@ -10,11 +10,6 @@ export default function HomePage() {
 
   return (
     <>
-      <div className="flex flex-wrap items-end justify-between gap-2 pb-8">
-        <h1 className="font-display text-4xl sm:text-5xl">Upcoming events</h1>
-        {events && <p className="text-sm text-muted">{events.length} scheduled</p>}
-      </div>
-
       {error ? (
         <LoadError error={error} what="events" onRetry={reload} />
       ) : !events ? (
@@ -23,7 +18,7 @@ export default function HomePage() {
         <div className="border-t border-line py-20 text-center">
           <p className="font-display text-3xl">Nothing on the calendar yet.</p>
           <Link href="/admin/events/new" className="mt-4 inline-block text-sm underline underline-offset-4">
-            Schedule the first event
+            Create one in the organizer area
           </Link>
         </div>
       ) : (

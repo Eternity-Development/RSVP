@@ -14,7 +14,6 @@ cp backend/.env.example backend/.env
 cp frontend/.env.local.example frontend/.env.local
 npm run install:all
 npm run db:deploy
-npm run db:seed      # optional sample data
 npm run dev          # web: http://localhost:3001  api: http://localhost:4000
 ```
 
