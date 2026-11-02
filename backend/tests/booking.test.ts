@@ -4,7 +4,7 @@ import { app } from "../src/app";
 import { prisma } from "../src/lib/prisma";
 import { bookingTransaction } from "../src/lib/booking";
 import { Prisma } from "@prisma/client";
-import { csvCell } from "../src/routes/rsvps";
+import { csvCell } from "../src/lib/csv";
 
 const inDays = (days: number) => new Date(Date.now() + days * 24 * 60 * 60 * 1000);
 

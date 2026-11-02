@@ -1,6 +1,6 @@
 import { Prisma, type PrismaClient, type Event } from "@prisma/client";
 import { prisma } from "./prisma";
-import { HttpError } from "./http";
+import { HttpError } from "./errors";
 
 type Db = PrismaClient | Prisma.TransactionClient;
 

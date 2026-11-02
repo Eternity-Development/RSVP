@@ -1,23 +1,7 @@
 import type { ErrorRequestHandler } from "express";
 import { Prisma } from "@prisma/client";
 import { z } from "zod";
-
-export class HttpError extends Error {
-  constructor(
-    public status: number,
-    message: string,
-  ) {
-    super(message);
-  }
-}
-
-const uuid = z.uuid();
-
-export function parseId(value: string, label: string): string {
-  const result = uuid.safeParse(value);
-  if (!result.success) throw new HttpError(400, `Invalid ${label} id.`);
-  return result.data;
-}
+import { HttpError } from "../lib/errors";
 
 const DB_UNAVAILABLE_CODES = new Set(["P1001", "P1002", "P1008", "P1017", "P2024"]);
 
