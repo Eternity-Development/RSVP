@@ -4,6 +4,7 @@ import { HttpError } from "./errors";
 
 type Db = PrismaClient | Prisma.TransactionClient;
 
+
 function isRetryable(err: unknown) {
   if (!(err instanceof Prisma.PrismaClientKnownRequestError)) return false;
   const sqlState = (err.meta as { code?: string } | undefined)?.code;
